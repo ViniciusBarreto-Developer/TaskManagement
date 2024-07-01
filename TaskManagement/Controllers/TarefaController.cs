@@ -4,7 +4,7 @@ using TaskManagement.AplicationService.Services.NotificationService;
 using TaskManagement.Controllers.Base;
 using TaskManagement.Core.Commands;
 using TaskManagement.Core.Commands.TarefaCommands;
-using TaskManagement.Domain.Contracts.Repositories;
+using TaskManagement.Domain.Contracts.Queries;
 
 namespace TaskManagement.Controllers
 {
@@ -12,12 +12,12 @@ namespace TaskManagement.Controllers
     [Route("tarefa")]
     public class TarefaController : MainController
     {
-        private readonly ITarefaRepository _tarefaRepository;
+        private readonly ITarefaQueries _tarefaQueries;
 
         public TarefaController(INotificationService notifier,
-                                ITarefaRepository tarefaRepository) : base(notifier)
+                                ITarefaQueries tarefaQueries) : base(notifier)
         {
-            _tarefaRepository = tarefaRepository;
+            _tarefaQueries = tarefaQueries;
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace TaskManagement.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var viewModel = await _tarefaRepository.GetByIdAsync(id);
+            var viewModel = await _tarefaQueries.GetByIdAsync(id);
 
             if (viewModel == null)
             {
@@ -58,7 +58,7 @@ namespace TaskManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var list = await _tarefaRepository.GetAllAsync();
+            var list = await _tarefaQueries.GetAllAsync();
 
             return CustomResponse(list);
         }

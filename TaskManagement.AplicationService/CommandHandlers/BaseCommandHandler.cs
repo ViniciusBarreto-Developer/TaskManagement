@@ -1,9 +1,9 @@
 ﻿using FluentValidation.Results;
-using TaskManagement.Mediator;
 using System.Linq.Expressions;
 using System.Reflection;
-using TaskManagement.Core.Contracts;
 using TaskManagement.Core.Commands;
+using TaskManagement.Core.Contracts;
+using TaskManagement.Mediator;
 
 namespace TaskManagement.AplicationService.CommandHandlers
 {
