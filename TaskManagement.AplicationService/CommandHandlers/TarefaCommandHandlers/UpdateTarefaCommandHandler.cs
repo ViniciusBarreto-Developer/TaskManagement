@@ -34,8 +34,10 @@ namespace TaskManagement.AplicationService.CommandHandlers.TarefaCommandHandlers
             {
                 tarefa.DataDeConclusao = DateTime.Now;
             }
-            else
+            else if (tarefa.Status != Status.Concluida)
+            {
                 tarefa.DataDeConclusao = null;
+            }
 
             await _tarefaRepository.UpdateAsync(tarefa);
 
